@@ -1,0 +1,43 @@
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic first_topic --replication-factor 1 --partitions 1
+
+kafka-topics.bat --bootstrap-server localhost:9092 --list
+
+kafka-topics.bat --bootstrap-server localhost:9092 --topic first_topic --describe
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic first_topic
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic first_topic
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic first_topic --from-beginning
+
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic second_topic --replication-factor 1 --partitions 1
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic second_topic
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic second_topic
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic second_topic --group app
+
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic third_topic --replication-factor 1 --partitions 3
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic third_topic --group app
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic third_topic
+
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic fourth_topic --replication-factor 1 --partitions 3
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic fourth_topic --group app
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic fourth_topic --property parse.key=true --property key.separator=:
+
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic fifth_topic --replication-factor 1 --partitions 1
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic fifth_topic --group app
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic fifth_topic
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic fifth_topic --group app --from-beginning
+
+kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group app --describe
+
+kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group app --reset-offsets --execute --topic fifth_topic --shift-by -2
