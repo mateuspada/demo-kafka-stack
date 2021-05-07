@@ -41,3 +41,19 @@ kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic fifth_topic
 kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group app --describe
 
 kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group app --reset-offsets --execute --topic fifth_topic --shift-by -2
+
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic sixth_topic --replication-factor 1 --partitions 3
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic sixth_topic
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic sixth_topic --group app
+
+docker-compose -f kafka-multiple.yml stop kafka2
+
+docker-compose -f kafka-multiple.yml up kafka2
+
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic seventh_topic --replication-factor 2 --partitions 3
+
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic seventh_topic --group app
+
+kafka-console-producer.bat --broker-list localhost:9092 --topic seventh_topic 
